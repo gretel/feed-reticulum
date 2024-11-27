@@ -67,19 +67,19 @@ endef
 define Package/rns/postinst
 #!/bin/sh
 [ -n "$$IPKG_INSTROOT" ] || {
-        # create reticulum user and group
-        group_exists rnsd || group_add rnsd 142
-        user_exists rnsd || user_add rnsd 142 142 "Reticulum daemon" /var/run/rnsd
+  # create reticulum user and group
+  group_exists rnsd || group_add rnsd 142
+  user_exists rnsd || user_add rnsd 142 142 "Reticulum daemon" /var/run/rnsd
 
-        # ensure correct permissions on directory
-        [ -d /var/run/rnsd ] || {
-                mkdir -m 0755 -p /var/run/rnsd
-                chown rnsd:rnsd /var/run/rnsd
-        }
+  # ensure correct permissions on directory
+  [ -d /var/run/rnsd ] || {
+    mkdir -m 0755 -p /var/run/rnsd
+    chown rnsd:rnsd /var/run/rnsd
+  }
 
-        # enable and start service
-        /etc/init.d/rnsd enable
-        /etc/init.d/rnsd start
+  # enable and start service
+  /etc/init.d/rnsd enable
+  /etc/init.d/rnsd start
 }
 endef
 
@@ -88,11 +88,11 @@ define Py3Package/rns/install
   $(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/* $(1)/usr/bin/
   # Fix shebangs
   $(SED) '1c#!/usr/bin/python3' $(1)/usr/bin/{rncp,rnid,rnir,rnodeconf,rnpath,rnprobe,rnsd,rnstatus,rnx}
-  
+
   # Ensure Python package is installed
   $(INSTALL_DIR) $(1)$(PYTHON3_PKG_DIR)
   $(CP) $(PKG_INSTALL_DIR)$(PYTHON3_PKG_DIR)/* $(1)$(PYTHON3_PKG_DIR)/
-  
+
   $(INSTALL_DIR) $(1)/etc/init.d
   $(INSTALL_BIN) ./files/rnsd.init $(1)/etc/init.d/rnsd
   $(INSTALL_DIR) $(1)/etc/config
