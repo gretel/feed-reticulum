@@ -1,20 +1,34 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rns
-PKG_VERSION:=0.8.6
-PKG_RELEASE:=2
+PKG_VERSION:=0.8.7
+PKG_RELEASE:=1
 
-PKG_HASH:=9194fb212924dfe1eea05adf9a7adce8b89a6a92665266ef2ddec15afe217d9f
+PKG_HASH:=70005cd418970c683b7b8d96e446d30ecfe790032310b3252247bb7ea576ab1f
+PKG_SOURCE:=rns-$(PKG_VERSION)-py3-none-any.whl
+PKG_SOURCE_URL:=https://github.com/gretel/Reticulum/releases/download/0.8.7-beta
+PKG_BUILD_DEPENDS:=python-wheel/host
 
 PKG_LICENSE:=GPL
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 
-PYPI_NAME:=rns
+PYTHON3_PKG_FORCE_DISTUTILS_SETUP:=1
 
-include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+
+define Build/Prepare
+		$(CP) $(DL_DIR)/$(PKG_SOURCE) $(PKG_BUILD_DIR)/
+endef
+
+define Build/Compile
+		$(HOST_PYTHON3_BIN) -m installer \
+				--destdir "$(PKG_INSTALL_DIR)" \
+				--no-compile-bytecode \
+				--prefix /usr \
+				"$(PKG_BUILD_DIR)/$(PKG_SOURCE)"
+endef
 
 define Package/rns
 	SECTION:=net
