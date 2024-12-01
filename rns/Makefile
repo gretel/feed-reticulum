@@ -75,25 +75,24 @@ define Package/rns-src/description
 endef
 
 define Package/rns/conffiles
-/etc/config/rnsd
+/etc/config/rns
 endef
 
 define Package/rns/postinst
 #!/bin/sh
 [ -n "$$IPKG_INSTROOT" ] || {
 	# create reticulum user and group
-	group_exists rnsd || group_add rnsd 142
-	user_exists rnsd || user_add rnsd 142 142 "Reticulum daemon" /var/run/rnsd
+	group_exists rns || group_add rns 142
+	user_exists rns || user_add rns 142 142 "Reticulum daemon" /var/run/rns
 
 	# ensure correct permissions on directory
-	[ -d /var/run/rnsd ] || {
-		mkdir -m 0755 -p /var/run/rnsd
-		chown rnsd:rnsd /var/run/rnsd
+	[ -d /var/run/rns ] || {
+		mkdir -m 0755 -p /var/run/rns
+		chown rns:rns /var/run/rns
 	}
 
-	# enable and start service
-	/etc/init.d/rnsd enable
-	/etc/init.d/rnsd start
+	# start service
+	/etc/init.d/rns start
 }
 endef
 
@@ -108,9 +107,9 @@ define Py3Package/rns/install
 	$(CP) $(PKG_INSTALL_DIR)$(PYTHON3_PKG_DIR)/* $(1)$(PYTHON3_PKG_DIR)/
 
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/rnsd.init $(1)/etc/init.d/rnsd
+	$(INSTALL_BIN) ./files/rns.init $(1)/etc/init.d/rns
 	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./files/rnsd.config $(1)/etc/config/rnsd
+	$(INSTALL_CONF) ./files/rns.config $(1)/etc/config/rns
 endef
 
 $(eval $(call Py3Package,rns))
