@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/logger -p info -t lxmf "Inbound message: ${1}"
+/usr/bin/logger -p alert -t lxmf "Inbound message: ${1}"

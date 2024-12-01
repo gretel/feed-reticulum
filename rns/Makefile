@@ -2,16 +2,17 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rns
 PKG_VERSION:=0.8.7
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
-PKG_HASH:=70005cd418970c683b7b8d96e446d30ecfe790032310b3252247bb7ea576ab1f
-PKG_SOURCE:=rns-$(PKG_VERSION)-py3-none-any.whl
-PKG_SOURCE_URL:=https://github.com/gretel/Reticulum/releases/download/0.8.7-beta
-PKG_BUILD_DEPENDS:=python-wheel/host
-
-PKG_LICENSE:=GPL
+PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
+
+PKG_HASH:=f963f820b4a2adb096c4c4333e6274bb2a012a33b19215da129c340bab6420e5
+PKG_SOURCE:=rns-$(PKG_VERSION)-py3-none-any.whl
+PKG_SOURCE_URL:=https://github.com/gretel/Reticulum/releases/download/0.8.7-beta1
+
+PKG_BUILD_DEPENDS:=python-wheel/host
 
 PYTHON3_PKG_FORCE_DISTUTILS_SETUP:=1
 

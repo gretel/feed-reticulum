@@ -4,14 +4,15 @@ PKG_NAME:=lxmf
 PKG_VERSION:=0.5.8
 PKG_RELEASE:=1
 
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=LICENSE
+PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
+
 PKG_HASH:=74374f2b03d5c5d11a6b03b1da9f6e4e0504584d8c2c47e9d975e30f3ae7f6ac
 PKG_SOURCE:=lxmf-$(PKG_VERSION)-py3-none-any.whl
 PKG_SOURCE_URL:=https://github.com/markqvist/LXMF/releases/download/0.5.8
-PKG_BUILD_DEPENDS:=python-wheel/host
 
-PKG_LICENSE:=GPL
-PKG_LICENSE_FILES:=LICENSE
-PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
+PKG_BUILD_DEPENDS:=python-wheel/host
 
 PYTHON3_PKG_FORCE_DISTUTILS_SETUP:=1
 
