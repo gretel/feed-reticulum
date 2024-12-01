@@ -92,6 +92,8 @@ define Py3Package/lxmf/install
 	$(INSTALL_BIN) ./files/lxmf.init $(1)/etc/init.d/lxmf
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/lxmf.config $(1)/etc/config/lxmf
+
+	$(INSTALL_BIN) ./files/lxmf-message.sh $(1)/usr/bin/
 endef
 
 $(eval $(call Py3Package,lxmf))
