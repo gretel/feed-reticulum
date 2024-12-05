@@ -40,12 +40,10 @@ A console user interface library dependency:
 ## Prerequisites 📋
 
 To use this feed, you need:
+
+- A computer running some Debian
 - OpenWrt buildroot environment
-- Python 3.11 or later
-- Required Python packages:
-  - cryptography
-  - pyserial
-  - urwid (for TUI applications)
+- This feed
 
 ## Development Setup 🛠️
 
@@ -53,7 +51,7 @@ To use this feed, you need:
 
 Install required system packages:
 ```bash
-sudo apt update && sudo apt install -y \
+sudo apt update && sudo apt install -qy \
     build-essential \
     ccache \
     file \
@@ -100,7 +98,16 @@ src-git luci https://git.openwrt.org/project/luci.git
 src-git reticulum https://github.com/gretel/feed-reticulum.git
 ```
 
-3. Update and install feeds:
+3. List using the `feeds` utility to confirm:
+
+```bash
+./scripts/feeds list -s
+packages   src-git  2b999558db0711124f7b5cf4afa201557352f694 https://git.openwrt.org/feed/packages.git
+luci       src-git  e76155d09484602e2b02e84bb8ffafa4848798f0 https://git.openwrt.org/project/luci.git
+reticulum  src-git  3d196e9b824158b9a428892c426e8365dc02c373 https://github.com/gretel/feed-reticulum.git
+```
+
+4. Update and install from all feeds:
 ```bash
 ./scripts/feeds update -a
 ./scripts/feeds install -a
@@ -129,13 +136,15 @@ x86                             x86_64             Generic PC/VM
 Raspberry Pi                    bcm27xx            Raspberry Pi 4
 ```
 
-Select at minimum:
+**Select at minimum**:
 - Target System
 - Subtarget
 - Target Profile (if building for specific device)
 - Package `rns` under `Network -> Reticulum`
 
 Save your configuration and exit menuconfig.
+
+> Backup `.config` file. It get's overwritten easily.
 
 ### Building Packages
 
@@ -147,19 +156,32 @@ make defconfig
 To build specific packages:
 ```bash
 # Clean and rebuild RNS package
-make package/feeds/reticulum/rns/clean NO_DEPS=1
-make package/feeds/reticulum/rns/compile V=s NO_DEPS=1
+make package/feeds/reticulum/rns/clean
+make package/feeds/reticulum/rns/compile V=s
 make package/index
 ```
+
+> `NO_DEPS=1` will skip building dependencies. Building of the `rns` package will fail if the required dependencies have not been built before. It's meant to speed up development iterations.
+
+> `V=s` adds very verbose output logging. Remove for proven builds.
+
+```bash
+make package/feeds/reticulum/rns/compile V=s NO_DEPS=1
+```
+
+### Building All
 
 For a full system build (optional):
 ```bash
 make -j$(nproc) world
 ```
 
+> This could result in a bootable distribution. No testing has been done yet!
+
 ## Package Configuration ⚙️
 
 ### RNS Configuration
+
 Basic UCI configuration:
 ```bash
 # Enable the service
@@ -174,6 +196,7 @@ Configuration directory: `/var/run/rns`
 Configuration file: `/etc/config/rns`
 
 ### LXMF Configuration
+
 Basic UCI configuration:
 ```bash
 # Enable the service
@@ -185,6 +208,7 @@ uci commit lxmf
 # Start the service
 service lxmf start
 ```
+
 Configuration directory: `/var/run/rns`
 
 Configuration file: `/etc/config/lxmf`
@@ -194,9 +218,10 @@ No configuration required - library package.
 
 ## Known Issues ⚡
 
-- Python module import issues related to OpenWrt's bytecode-only packaging
-- Service initialization requires further testing
+- [~~Python module import issues related to OpenWrt's bytecode-only packaging~~](https://github.com/markqvist/Reticulum/issues/623)
+- ~~Service initialization requires further testing~~
 - Documentation needs expansion
+- `nomadnet` package not done yet, but `urwid` is prepared.
 
 ## Contributing 🤝
 
