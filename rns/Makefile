@@ -88,11 +88,15 @@ define Package/rns/postinst
 	group_exists rns || group_add rns 142
 	user_exists rns || user_add rns 142 142 "Reticulum daemon" /var/run/rns
 
-	# ensure correct permissions on directory
+	# Ensure correct permissions on directory
 	[ -d /var/run/rns ] || {
 		mkdir -m 0755 -p /var/run/rns
 		chown rns:rns /var/run/rns
 	}
+
+	# Preserve on upgrade
+	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
+	echo "/var/run/rns" > "/lib/upgrade/keep.d/rns"
 
 	# start service
 	/etc/init.d/rns start
