@@ -1,16 +1,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rns
-PKG_VERSION:=0.8.7
-PKG_RELEASE:=5
+PKG_VERSION:=0.8.8
+PKG_RELEASE:=1
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 
-PKG_HASH:=454ccec3b67dc111e4958ba3b826bfa1df46c118bbf3482a7d61c71b417d6236
+PKG_HASH:=98d2dd23414db57078b2a4346cdf1a5cb15fe7120ede5627373b17114e21c3aa
 PKG_SOURCE:=rns-$(PKG_VERSION)-py3-none-any.whl
-PKG_SOURCE_URL:=https://github.com/gretel/Reticulum/releases/download/0.8.7
+PKG_SOURCE_URL:=https://github.com/gretel/Reticulum/releases/download/0.8.8-alpha1
 
 PKG_BUILD_DEPENDS:=python-wheel/host
 
@@ -38,8 +38,10 @@ define Package/rns
 	TITLE:=Reticulum Network Stack
 	URL:=https://github.com/markqvist/Reticulum
 	DEPENDS:= \
-		+python3-light \
+		+python3-asyncio \
 		+python3-cryptography \
+		+python3-light \
+		+python3-multiprocessing \
 		+python3-pyserial
 endef
 
