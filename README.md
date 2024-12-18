@@ -64,6 +64,7 @@ sudo apt update && sudo apt install -qy \
     libncurses5-dev \
     libssl-dev \
     python3-setuptools \
+    rsync \
     unzip \
     wget \
     zlib1g-dev
