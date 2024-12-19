@@ -96,7 +96,7 @@ define Package/rns/postinst
 
 	# Preserve on upgrade
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
-	echo "/var/run/rns" > "/lib/upgrade/keep.d/rns"
+	echo "/var/run/rns/" > "/lib/upgrade/keep.d/rns"
 
 	# start service
 	/etc/init.d/rns start
