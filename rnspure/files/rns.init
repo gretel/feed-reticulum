@@ -27,7 +27,7 @@ start_service() {
 	fi
 	
 	# Log the command we're about to run
-	logger -t lxmf "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
+	logger -t rns "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
 
 	# https://openwrt.org/docs/guide-developer/procd-init-scripts        
 	procd_open_instance
