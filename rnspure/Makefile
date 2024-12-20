@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rnspure
 PKG_VERSION:=0.8.8
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -39,7 +39,10 @@ define Package/rnspure
 	URL:=https://github.com/markqvist/Reticulum
 	DEPENDS:= \
 		+python3-asyncio \
+		+python3-codecs \
+		+python3-ctypes \
 		+python3-light \
+		+python3-logging \
 		+python3-multiprocessing
 endef
 
@@ -84,15 +87,9 @@ endef
 define Package/rnspure/postinst
 #!/bin/sh
 [ -n "$$IPKG_INSTROOT" ] || {
-	# create reticulum user and group
-	group_exists rns || group_add rns 142
-	user_exists rns || user_add rns 142 142 "Reticulum daemon" /var/run/rns
-
-	# Ensure correct permissions on directory
-	[ -d /var/run/rns ] || {
-		mkdir -m 0755 -p /var/run/rns
-		chown rns:rns /var/run/rns
-	}
+	# Create user and group
+	group_exists rns 142 || group_add rns 142
+	user_exists rns 142 || user_add rns 142 142 "Reticulum daemon" /var/run/rns
 
 	# Preserve on upgrade
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"

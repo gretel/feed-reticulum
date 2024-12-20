@@ -9,20 +9,14 @@ USER=rns
 
 start_service() {
 	config_load lxmf
-	local enabled propagation_node on_inbound
-	
 	config_get_bool enabled main enabled 0
-	config_get_bool propagation_node main propagation_node 0
-	config_get on_inbound main on_inbound ''
-
+	
 	[ "$enabled" -eq 0 ] && {
 		logger -t lxmf "Service not enabled"
 		return 0
 	}
 
-	local args="-s"
-	[ "$propagation_node" -eq 1 ] && args="$args -p"
-	[ -n "$on_inbound" ] && [ -x "$on_inbound" ] && args="$args -i $on_inbound"
+	local args=""
 
 	# Log the command we're about to run
 	logger -t lxmf "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
@@ -30,11 +24,14 @@ start_service() {
 	# https://openwrt.org/docs/guide-developer/procd-init-scripts        
 	procd_open_instance
 	procd_set_param command ${PROG} ${args}
-	procd_set_param user ${USER}
-	procd_set_param pidfile ${RUN_DIR}/lxmd.pid
 	procd_set_param env HOME=${RUN_DIR}
+	procd_set_param pidfile ${RUN_DIR}/lxmd.pid
+	procd_set_param stderr 1
+	procd_set_param stdout 1
+	procd_set_param term_timeout 10
+	procd_set_param user ${USER}
 	# Keep process running, restart if it dies
-	procd_set_param respawn ${respawn_threshold:-3600} ${respawn_timeout:-5} ${respawn_retry:-5}
+	procd_set_param respawn ${respawn_threshold:-3600} ${respawn_timeout:-10} ${respawn_retry:-5}
 	procd_close_instance
 }
 

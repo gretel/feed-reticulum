@@ -38,8 +38,8 @@ define Package/nomadnet
 	TITLE:=Nomad Network
 	URL:=https://github.com/markqvist/NomadNet
 	DEPENDS:= \
-		+python3-urwid \
 		+lxmf \
+		+python3-urwid \
 		+rns
 endef
 
