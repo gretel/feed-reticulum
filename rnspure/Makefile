@@ -8,7 +8,7 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 
-PKG_HASH:=98d2dd23414db57078b2a4346cdf1a5cb15fe7120ede5627373b17114e21c3aa
+PKG_HASH:=579aee2bcf6edaefcca5c8352ec459371bc41dce06baba8b393e5f93ef9e9a58
 PKG_SOURCE:=rnspure-$(PKG_VERSION)-py3-none-any.whl
 PKG_SOURCE_URL:=https://github.com/gretel/Reticulum/releases/download/0.8.8-alpha1
 
