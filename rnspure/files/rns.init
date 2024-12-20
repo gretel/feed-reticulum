@@ -1,37 +1,40 @@
 #!/bin/sh /etc/rc.common
 
-START=21
+START=20
 USE_PROCD=1
 
-PROG=/usr/bin/lxmd
+PROG=/usr/bin/rnsd
 RUN_DIR=/var/run/rns
 USER=rns
 
 start_service() {
-	config_load lxmf
-	local enabled propagation_node on_inbound
-	
-	config_get_bool enabled main enabled 0
-	config_get_bool propagation_node main propagation_node 0
-	config_get on_inbound main on_inbound ''
+	config_load rns
+	local enabled
 
-	[ "$enabled" -eq 0 ] && {
-		logger -t lxmf "Service not enabled"
+	config_get_bool enabled main enabled 0
+	if [ "$enabled" -eq 0 ]; then
+		logger -t rns "Service not enabled"
 		return 0
-	}
+	fi
 
 	local args="-s"
-	[ "$propagation_node" -eq 1 ] && args="$args -p"
-	[ -n "$on_inbound" ] && [ -x "$on_inbound" ] && args="$args -i $on_inbound"
 
+	logger -t rns "Starting RNS daemon..."
+	
+	# Ensure run directory exists with correct permissions
+	if [ ! -d ${RUN_DIR} ]; then
+		mkdir -m 0755 -p ${RUN_DIR}
+		chown ${USER}:${GROUP} ${RUN_DIR}
+	fi
+	
 	# Log the command we're about to run
 	logger -t lxmf "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
 
 	# https://openwrt.org/docs/guide-developer/procd-init-scripts        
 	procd_open_instance
-	procd_set_param command ${PROG} ${args}
+	procd_set_param command ${PROG} ${args} 
 	procd_set_param user ${USER}
-	procd_set_param pidfile ${RUN_DIR}/lxmd.pid
+	procd_set_param pidfile ${RUN_DIR}/rnsd.pid
 	procd_set_param env HOME=${RUN_DIR}
 	# Keep process running, restart if it dies
 	procd_set_param respawn ${respawn_threshold:-3600} ${respawn_timeout:-5} ${respawn_retry:-5}
@@ -39,11 +42,11 @@ start_service() {
 }
 
 reload_service() {
-	logger -t lxmf "Reloading service..."
+	logger -t rns "Reloading service..."
 	stop
 	start
 }
 
 service_triggers() {
-	procd_add_reload_trigger "lxmf"
+	procd_add_reload_trigger "rns"
 }

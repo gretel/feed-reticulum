@@ -5,12 +5,12 @@ PKG_VERSION:=2.6.16
 PKG_RELEASE:=1
 
 PYPI_NAME:=urwid
-PKG_HASH:=93ad239939e44c385e64aa00027878b9e5c486d59e855ec8ab5b1e1adcdb32a2
+PKG_HASH:=de14896c6df9eb759ed1fd93e0384a5279e51e0dde8f621e4083f7a8368c0797
 
 # https://github.com/egorenar/openwrt-packages-custom/tree/master/python3-urwid
 PKG_MAINTAINER:=Alexander Egorenkov <egorenar-dev@posteo.net>
 PKG_LICENSE:=LGPL-2.1-or-later
-PKG_LICENSE_FILES:=COPYING
+PKG_LICENSE_FILES:=LICENSE
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk

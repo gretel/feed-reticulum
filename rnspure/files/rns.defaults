@@ -1,0 +1,11 @@
+# post-install script
+uci -q batch >/dev/null <<'EOF'
+	add firewall rule
+	set firewall.@rule[-1].dest_port='4242'
+	set firewall.@rule[-1].src='*'
+	set firewall.@rule[-1].name='Allow-RNS'
+	set firewall.@rule[-1].proto='tcp'
+	set firewall.@rule[-1].target='ACCEPT'
+	set firewall.@rule[-1].enabled='1'
+	commit firewall
+EOF
