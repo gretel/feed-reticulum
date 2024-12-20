@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# post-install script
+uci -q batch >/dev/null <<'EOF'
+	delete firewall.rns
+	set firewall.rns.dest_port='4242'
+	set firewall.rns.src='*'
+	set firewall.rns.name='Allow-RNS'
+	set firewall.rns.family='any'
+	set firewall.rns.target='ACCEPT'
+	set firewall.rns.enabled='1'
+	set firewall.rns.reload='1'
+	commit firewall
+EOF
+
+exit 0
