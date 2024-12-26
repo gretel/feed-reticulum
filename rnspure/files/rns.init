@@ -19,11 +19,11 @@ start_service() {
 
 	local args=""
 
-	# Ensure run directory exists with correct permissions
-	if [ ! -d ${RUN_DIR} ]; then
-		logger -t rns "Creating directory: ${RUN_DIR}, user/group: ${USER}:${GROUP} "
+	# Check if rnsd has been run before to ensure correct permissions
+	if [ ! -d "${RUN_DIR}/.reticulum" ]; then
+		logger -t rns "Creating directory: ${RUN_DIR}, user: ${USER}"
 		mkdir -m 0755 -p ${RUN_DIR}
-		chown ${USER}:${GROUP} ${RUN_DIR}
+		chown ${USER} ${RUN_DIR}
 	fi
 	
 	# Log the command we're about to run
