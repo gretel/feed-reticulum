@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rns
 PKG_VERSION:=0.8.8
-PKG_RELEASE:=2
+PKG_RELEASE:=3
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -91,11 +91,14 @@ define Package/rns/postinst
 	group_exists rns 142 || group_add rns 142
 	user_exists rns 142 || user_add rns 142 142 "Reticulum daemon" /var/run/rns
 
+	# Allow accessing serial ports
+	addgroup rns dialout
+
 	# Preserve on upgrade
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
 	echo "/var/run/rns/" > "/lib/upgrade/keep.d/rns"
 
-	# start service
+	# Start service
 	/etc/init.d/rns start
 }
 endef
