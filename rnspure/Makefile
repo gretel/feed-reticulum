@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rnspure
 PKG_VERSION:=0.8.8
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -89,17 +89,14 @@ define Package/rnspure/postinst
 [ -n "$$IPKG_INSTROOT" ] || {
 	# Create user and group
 	group_exists rns 142 || group_add rns 142
-	user_exists rns 142 || user_add rns 142 142 "Reticulum daemon" /var/run/rns
+	user_exists rns 142 || user_add rns 142 142 "Reticulum daemon" /var/rns
 
 	# Allow accessing serial ports
 	addgroup rns dialout
 
 	# Preserve on upgrade
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
-	echo "/var/run/rns/" > "/lib/upgrade/keep.d/rns"
-
-	# Start service
-	/etc/init.d/rns start
+	echo "/var/rns/" > "/lib/upgrade/keep.d/rns"
 }
 endef
 
