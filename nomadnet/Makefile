@@ -1,14 +1,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nomadnet
-PKG_VERSION:=0.5.6
-PKG_RELEASE:=2
+PKG_VERSION:=0.6.0
+PKG_RELEASE:=0
 
 PKG_LICENSE:=GNU
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 
-PKG_HASH:=ec4ae6f910dc146838e1c3028a3735f669871d557cb9ae45ee553248ff87d8a4
+PKG_HASH:=bfbf3da22d001bf3b64ed13bf7e3eda71bc4cd2c822d113f0d2d702a060d2774
 PKG_SOURCE:=nomadnet-$(PKG_VERSION)-py3-none-any.whl
 PKG_SOURCE_URL:=https://github.com/markqvist/NomadNet/releases/download/$(PKG_VERSION)
 

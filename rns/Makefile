@@ -1,16 +1,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rns
-PKG_VERSION:=0.8.8
-PKG_RELEASE:=7
+PKG_VERSION:=0.9.1
+PKG_RELEASE:=0
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 
-PKG_HASH:=9c1755a81049c67b051ecb9fe4b2c5f7d98bf09d20ed52d6ce6a410298b0527b
+PKG_HASH:=49288a562ad6d4b5647c3afec051a6bb6497b75e3f165a972436134d4a93ad76
 PKG_SOURCE:=rns-$(PKG_VERSION)-py3-none-any.whl
-PKG_SOURCE_URL:=https://github.com/markqvist/Reticulum/releases/download/0.8.8
+PKG_SOURCE_URL:=https://github.com/markqvist/Reticulum/releases/download/$(PKG_VERSION)
 
 PKG_BUILD_DEPENDS:=python-wheel/host
 
