@@ -8,7 +8,7 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 
-PKG_HASH:=49288a562ad6d4b5647c3afec051a6bb6497b75e3f165a972436134d4a93ad76
+PKG_HASH:=abd6c4bdead2fc25d0b9b2cda5708586e8cb776b088f2a901a5f262e2ed901ae
 PKG_SOURCE:=rnspure-$(PKG_VERSION)-py3-none-any.whl
 PKG_SOURCE_URL:=https://github.com/markqvist/Reticulum/releases/download/$(PKG_VERSION)
 
