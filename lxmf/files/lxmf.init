@@ -20,7 +20,7 @@ start_service() {
 		return 0
 	}
 
-	local args="-s"
+	local args=""
 	[ "$propagation_node" -eq 1 ] && args="$args -p"
 	[ -n "$on_inbound" ] && [ -x "$on_inbound" ] && args="$args -i $on_inbound"
 
