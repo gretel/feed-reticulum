@@ -9,14 +9,20 @@ USER=rns
 
 start_service() {
 	config_load lxmf
-	config_get_bool enabled main enabled 0
+	local enabled propagation_node on_inbound
 	
+	config_get_bool enabled main enabled 0
+	config_get_bool propagation_node main propagation_node 0
+	config_get on_inbound main on_inbound ''
+
 	[ "$enabled" -eq 0 ] && {
 		logger -t lxmf "Service not enabled"
 		return 0
 	}
 
-	local args=""
+	local args="-s"
+	[ "$propagation_node" -eq 1 ] && args="$args -p"
+	[ -n "$on_inbound" ] && [ -x "$on_inbound" ] && args="$args -i $on_inbound"
 
 	# Log the command we're about to run
 	logger -t lxmf "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
