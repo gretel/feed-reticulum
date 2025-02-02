@@ -37,10 +37,7 @@ define Package/nomadnet
 	SUBMENU:=Reticulum
 	TITLE:=Nomad Network
 	URL:=https://github.com/markqvist/NomadNet
-	DEPENDS:= \
-		+lxmf \
-		+python3-urwid \
-		+rnspure
+	DEPENDS:=lxmf python3-urwid rns
 endef
 
 define Package/nomadnet-src
