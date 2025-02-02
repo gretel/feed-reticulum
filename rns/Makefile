@@ -92,7 +92,7 @@ define Package/rns/postinst
 	user_exists rns 142 || user_add rns 142 142 "Reticulum daemon" /var/rns
 
 	# Allow accessing serial ports
-	awk -F: '$1=="dialout" {if ($4=="") $4="rns"; else if ($4!~/rns/) $4=$4",rns"} {print}' OFS=: /etc/group > /etc/group.new && mv /etc/group.new /etc/group
+	group_add_user dialout rns
 
 	# Preserve on upgrade
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
