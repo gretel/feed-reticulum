@@ -10,8 +10,6 @@ We are working on stabilizing the packages and resolving various implementation 
 
 ## Available Packages 📦
 
-![image](https://github.com/user-attachments/assets/3b2f2e90-69d5-4ab3-956a-75205ef3fdcf)
-
 Currently, this feed provides the following packages:
 
 ### rns & rns-src 🌐
@@ -22,6 +20,14 @@ The core Reticulum Network Stack implementation package. Features:
 - Dedicated system user and group for security
 - Automatic service management
 - Source code package available separately
+- Additional Python dependencies required
+
+### rnspure & rnspure-src 🌐
+Pure Python variant of the Reticulum Network Stack. Features:
+- All features of the core RNS package
+- No external dependencies required for installation ("pure")
+- Lighter weight alternative for constrained systems
+- Recommended for most installations
 
 ### lxmf & lxmf-src 💬
 Lightweight Extensible Message Format implementation. Features:
@@ -29,6 +35,15 @@ Lightweight Extensible Message Format implementation. Features:
 - Zero-configuration message routing
 - End-to-end encryption with Forward Secrecy
 - Compatible with all transport mediums supported by Reticulum
+- Source code package available separately
+
+### nomadnet & nomadnet-src 🕸️
+Resilient mesh communication platform:
+- Built on LXMF and Reticulum
+- Private and resilient communications platforms
+- No signups, no agreements, no data handover
+- Text-based user interface using urwid
+- Supports various communication mediums
 - Source code package available separately
 
 ### python3-urwid 🖥️
@@ -192,7 +207,7 @@ uci commit rns
 # Start the service
 service rns start
 ```
-Configuration directory: `/var/run/rns`
+Configuration directory: `/var/rns`
 
 Configuration file: `/etc/config/rns`
 
@@ -210,9 +225,25 @@ uci commit lxmf
 service lxmf start
 ```
 
-Configuration directory: `/var/run/rns`
+Configuration directory: `/var/rns`
 
 Configuration file: `/etc/config/lxmf`
+
+### Nomadnet Configuration
+
+Basic UCI configuration:
+```bash
+# Enable the service
+uci set nomadnet.main.enabled=1
+uci commit nomadnet
+
+# Start the service
+service nomadnet start
+```
+
+Configuration directory: `/var/rns`
+
+Configuration file: `/etc/config/nomadnet`
 
 ### Urwid Configuration
 No configuration required - library package.
@@ -222,7 +253,7 @@ No configuration required - library package.
 - [~~Python module import issues related to OpenWrt's bytecode-only packaging~~](https://github.com/markqvist/Reticulum/issues/623)
 - ~~Service initialization requires further testing~~
 - Documentation needs expansion
-- `nomadnet` package not done yet, but `urwid` is prepared.
+- Implementation of systemd and procd service files needs testing
 
 ## Contributing 🤝
 
@@ -243,6 +274,16 @@ feed-reticulum/
 │   └── files/
 │       ├── rns.init
 │       └── rns.config
+├── rnspure/            # Pure Python RNS variant
+│   ├── Makefile
+│   └── files/
+│       ├── rns.init
+│       └── rns.config
+├── nomadnet/          # Nomad Network package
+│   ├── Makefile
+│   └── files/
+│       ├── nomadnet.init
+│       └── nomadnet.config
 ├── python3-urwid/      # urwid UI library package
 │   └── Makefile
 ├── LICENSE
@@ -254,6 +295,7 @@ feed-reticulum/
 Each package is released under its respective license:
 - RNS: MIT License
 - LXMF: MIT License
+- Nomadnet: GPL-3.0
 - python3-urwid: LGPL-2.1 or later
 
 ## Acknowledgments 🙏
