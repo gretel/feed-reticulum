@@ -1,14 +1,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rnspure
-PKG_VERSION:=0.9.1
-PKG_RELEASE:=1
+PKG_VERSION:=0.9.2
+PKG_RELEASE:=0
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 
-PKG_HASH:=abd6c4bdead2fc25d0b9b2cda5708586e8cb776b088f2a901a5f262e2ed901ae
+PKG_HASH:=1e7c123d244cc14c287568f3a99953cc11ffc1e79a72a029aa1be72fa8eff24e
 PKG_SOURCE:=rnspure-$(PKG_VERSION)-py3-none-any.whl
 PKG_SOURCE_URL:=https://github.com/markqvist/Reticulum/releases/download/$(PKG_VERSION)
 
