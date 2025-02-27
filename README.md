@@ -1,6 +1,6 @@
 # OpenWrt Reticulum Feed 📡
 
-This repository contains OpenWrt packages related to the [Reticulum](https://github.com/markqvist/Reticulum) ecosystem. The feed currently provides packages for the [Reticulum Network Stack](https://github.com/markqvist/Reticulum), an open-source cryptography-based networking stack designed for reliable communication over high-latency, low-bandwidth networks.
+This repository contains OpenWrt packages related to the [Reticulum](https://reticulum.network/) ecosystem. The feed currently provides packages for the [Reticulum Network Stack](https://github.com/markqvist/Reticulum), an open-source cryptography-based networking stack designed for reliable communication over high-latency, low-bandwidth networks.
 
 ## Current Status ⚠️
 
@@ -10,47 +10,24 @@ We are working on stabilizing the packages and resolving various implementation 
 
 ## Available Packages 📦
 
-Currently, this feed provides the following packages:
+This feed provides the following packages:
 
-### rns & rns-src 🌐
-The core Reticulum Network Stack implementation package. Features:
-- Full Reticulum Network Stack implementation
-- OpenWrt UCI integration for configuration management
-- Proper system integration with procd init scripts
-- Dedicated system user and group for security
-- Automatic service management
-- Source code package available separately
-- Additional Python dependencies required
+### rnspure 🌐
+Pure Python variant of the Reticulum Network Stack with no external dependencies required for installation.
 
-### rnspure & rnspure-src 🌐
-Pure Python variant of the Reticulum Network Stack. Features:
-- All features of the core RNS package
-- No external dependencies required for installation ("pure")
-- Lighter weight alternative for constrained systems
-- Recommended for most installations
+### rns 🌐
+The core Reticulum Network Stack implementation with Python dependencies.
 
-### lxmf & lxmf-src 💬
-Lightweight Extensible Message Format implementation. Features:
-- Built on top of Reticulum Network Stack
-- Zero-configuration message routing
-- End-to-end encryption with Forward Secrecy
-- Compatible with all transport mediums supported by Reticulum
-- Source code package available separately
+### lxmf 💬
+Lightweight Extensible Message Format implementation for messaging over Reticulum.
 
-### nomadnet & nomadnet-src 🕸️
-Resilient mesh communication platform:
-- Built on LXMF and Reticulum
-- Private and resilient communications platforms
-- No signups, no agreements, no data handover
-- Text-based user interface using urwid
-- Supports various communication mediums
-- Source code package available separately
+### nomadnet🕸️
+Terminal-based resilient mesh communications platform built on LXMF and Reticulum.
 
 ### python3-urwid 🖥️
-A console user interface library dependency:
-- Provides text-based user interface capabilities
-- Required by some Reticulum ecosystem applications
-- Cross-platform compatibility
+Console user interface library required by nomadnet.
+
+Note: The `-src` packages are optional and provide the Python source code, while the standard packages contain only bytecode and metadata as is typical for OpenWrt packages. Most users will only need the standard packages.
 
 ## Prerequisites 📋
 
@@ -129,42 +106,9 @@ reticulum  src-git  3d196e9b824158b9a428892c426e8365dc02c373 https://github.com/
 ./scripts/feeds install -a
 ```
 
-### Configure Target Platform
-
-Before building, configure your target platform/architecture:
-
-```bash
-make menuconfig
-```
-
-Key configuration areas:
-1. Target System (e.g., `x86`, `MediaTek Ralink MIPS`, `Qualcomm Atheros AR7xxx/AR9xxx`)
-2. Subtarget (e.g., `x86_64`, `MT7621`, `generic`)
-3. Target Profile (specific device or generic profile)
-
-Common platforms include:
-```
-Target System                     Subtarget         Example Devices
-────────────────────────────────────────────────────────────────────
-MediaTek Ralink MIPS   (ramips)  MT7621            Ubiquiti EdgeRouter X
-Qualcomm Atheros AR7xxx         generic            GL.iNet GL-AR750S
-x86                             x86_64             Generic PC/VM
-Raspberry Pi                    bcm27xx            Raspberry Pi 4
-```
-
-**Select at minimum**:
-- Target System
-- Subtarget
-- Target Profile (if building for specific device)
-- Package `rns` under `Network -> Reticulum`
-
-Save your configuration and exit menuconfig.
-
-> Backup `.config` file. It get's overwritten easily.
-
 ### Building Packages
 
-For a basic configuration:
+For a default configuration:
 ```bash
 make defconfig
 ```
@@ -258,37 +202,6 @@ No configuration required - library package.
 ## Contributing 🤝
 
 We welcome contributions to expand the Reticulum ecosystem on OpenWrt. Please ensure your pull requests are well-documented and include appropriate test cases.
-
-## Feed Structure 📁
-
-The feed follows OpenWrt's standard directory structure:
-```
-feed-reticulum/
-├── lxmf/               # LXMF package
-│   ├── Makefile
-│   └── files/
-│       ├── lxmf.init
-│       └── lxmf.config
-├── rns/                # Reticulum Network Stack package
-│   ├── Makefile
-│   └── files/
-│       ├── rns.init
-│       └── rns.config
-├── rnspure/            # Pure Python RNS variant
-│   ├── Makefile
-│   └── files/
-│       ├── rns.init
-│       └── rns.config
-├── nomadnet/          # Nomad Network package
-│   ├── Makefile
-│   └── files/
-│       ├── nomadnet.init
-│       └── nomadnet.config
-├── python3-urwid/      # urwid UI library package
-│   └── Makefile
-├── LICENSE
-└── README.md
-```
 
 ## License ⚖️
 
