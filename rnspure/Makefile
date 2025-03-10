@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rnspure
 PKG_VERSION:=0.9.2
-PKG_RELEASE:=0
+PKG_RELEASE:=1
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -88,8 +88,8 @@ define Package/rnspure/postinst
 #!/bin/sh
 [ -n "$$IPKG_INSTROOT" ] || {
 	# Create user and group
+	user_exists rns 142 || user_add rns 142
 	group_exists rns 142 || group_add rns 142
-	user_exists rns 142 || user_add rns 142 142 "Reticulum daemon" /var/rns
 
 	# Allow accessing serial ports
 	group_add_user dialout rns

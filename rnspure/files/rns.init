@@ -6,24 +6,35 @@ USE_PROCD=1
 PROG=/usr/bin/rnsd
 RUN_DIR=/var/rns
 USER=rns
+USERID=142
+
+ensure_user() {
+	user_exists $USER $USERID || user_add $USER $USERID
+	group_exists $USER $USERID || group_add $USER $USERID
+}
+
+ensure_storage() {
+	mkdir -m 0755 -p ${RUN_DIR}
+	chown ${USER} ${RUN_DIR}
+}
 
 start_service() {
 	config_load rns
 	local enabled
-
 	config_get_bool enabled main enabled 0
 	if [ "$enabled" -eq 0 ]; then
 		logger -t rns "Service not enabled"
 		return 0
 	fi
-
 	local args=""
 
-	# Check if rnsd has been run before to ensure correct permissions
+	# Ensure dedicated user and group exists
+	ensure_user
+	# Check if deamon has been run before
 	if [ ! -d "${RUN_DIR}/.reticulum" ]; then
 		logger -t rns "Creating directory: ${RUN_DIR}, user: ${USER}"
-		mkdir -m 0755 -p ${RUN_DIR}
-		chown ${USER} ${RUN_DIR}
+		# Ensure storage is set up
+		ensure_storage
 	fi
 	
 	# Log the command we're about to run
