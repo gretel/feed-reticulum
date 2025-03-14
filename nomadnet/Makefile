@@ -104,6 +104,7 @@ define Py3Package/nomadnet/install
 
 	mkdir -p $(1)/var/rns/.nomadnetwork
 	$(INSTALL_DATA) ./files/config $(1)/var/rns/.nomadnetwork/
+	chown -R 142:142 $(1)/var/rns/.nomadnetwork
 endef
 
 $(eval $(call Py3Package,nomadnet))

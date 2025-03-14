@@ -36,7 +36,7 @@ start_service() {
 	fi
 
 	# We can only handle daemons here
-	local args="-d"
+	local args="-c -d"
 
 	# Log the command we're about to run
 	logger -t nomadnet "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
