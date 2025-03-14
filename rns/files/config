@@ -45,3 +45,5 @@
     enabled = False
     target_host = rns.c3.jitter.eu
     target_port = 4242
+    bitrate = 10_000_000
+
