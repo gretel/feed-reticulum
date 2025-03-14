@@ -16,20 +16,20 @@ periodic_lxmf_sync = yes
 required_stamp_cost = 2 # TODO: remark
 try_propagation_on_send_fail = yes
 
-# [textui]
-# intro_time = 0
-# theme = dark
-# # colormode = monochrome
-# # colormode = 16
-# # colormode = 88
-# colormode = 256
-# # colormode = 24bit
-# # glyphs = plain
-# glyphs = unicode
-# # glyphs = nerdfont
-# mouse_enabled = False
-# editor = vi
-# hide_guide = yes
+[textui]
+intro_time = 0
+theme = dark
+# colormode = monochrome
+# colormode = 16
+# colormode = 88
+colormode = 256
+# colormode = 24bit
+# glyphs = plain
+glyphs = unicode
+# glyphs = nerdfont
+mouse_enabled = False
+editor = vi
+hide_guide = yes
 
 [node]
 enable_node = No
