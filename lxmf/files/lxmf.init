@@ -34,7 +34,7 @@ start_service() {
 	ensure_user
 	ensure_storage
 
-	local args=""
+	local args="-q" # quiet
 	[ "$propagation_node" -eq 1 ] && args="$args -p"
 	[ -n "$on_inbound" ] && [ -x "$on_inbound" ] && args="$args -i $on_inbound"
 
