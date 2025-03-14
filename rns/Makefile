@@ -57,27 +57,27 @@ define Package/rns-src
 endef
 
 define Package/rns/description
-	Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
+Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
 
-	It can operate even with very high latency and extremely low bandwidth.
+It can operate even with very high latency and extremely low bandwidth.
 
-	Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
-	initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
-	unforgeable delivery acknowledgements and more.
+Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
+initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
+unforgeable delivery acknowledgements and more.
 
-	This package contains only bytecode and metadata.
+This package contains only bytecode and metadata.
 endef
 
 define Package/rns-src/description
-	Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
+Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
 
-	It can operate even with very high latency and extremely low bandwidth.
+It can operate even with very high latency and extremely low bandwidth.
 
-	Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
-	initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
-	unforgeable delivery acknowledgements and more.
+Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
+initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
+unforgeable delivery acknowledgements and more.
 
-	This package adds the Python source code.
+This package adds the Python source code.
 endef
 
 define Package/rns/conffiles

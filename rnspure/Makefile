@@ -55,29 +55,29 @@ define Package/rnspure-src
 endef
 
 define Package/rnspure/description
-	Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
+Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
 
-	It can operate even with very high latency and extremely low bandwidth.
+It can operate even with very high latency and extremely low bandwidth.
 
-	Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
-	initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
-	unforgeable delivery acknowledgements and more.
+Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
+initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
+unforgeable delivery acknowledgements and more.
 
-	This package contains only bytecode and metadata.
-	No external dependencies required for installation ("pure").
+This package contains only bytecode and metadata.
+No external dependencies required for installation ("pure").
 endef
 
 define Package/rnspure-src/description
-	Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
+Reticulum is the cryptography-based networking stack for building local and wide-area networks with readily available hardware.
 
-	It can operate even with very high latency and extremely low bandwidth.
+It can operate even with very high latency and extremely low bandwidth.
 
-	Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
-	initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
-	unforgeable delivery acknowledgements and more.
+Reticulum allows you to build wide-area networks with off-the-shelf tools, and offers end-to-end encryption and connectivity,
+initiator anonymity, autoconfiguring cryptographically backed multi-hop transport, efficient addressing,
+unforgeable delivery acknowledgements and more.
 
-	This package adds the Python source code.
-	No external dependencies required for installation ("pure").
+This package adds the Python source code.
+No external dependencies required for installation ("pure").
 endef
 
 define Package/rnspure/conffiles

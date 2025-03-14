@@ -29,7 +29,7 @@ define Package/python3-urwid
 endef
 
 define Package/python3-urwid/description
-		Urwid is a console user interface library for Python on Linux, OSX, Cygwin or other unix-like OS and partially supports Windows OS.
+Urwid is a console user interface library for Python on Linux, OSX, Cygwin or other unix-like OS and partially supports Windows OS.
 endef
 
 $(eval $(call Py3Package,python3-urwid))

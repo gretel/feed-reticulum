@@ -49,21 +49,21 @@ define Package/lxmf-src
 endef
 
 define Package/lxmf/description
-	LXMF is a simple and flexible messaging format and delivery protocol that allows
-	a wide variety of implementations, while using as little bandwidth as possible.
-	It is built on top of Reticulum and offers zero-conf message routing, end-to-end encryption
-	and Forward Secrecy, and can be transported over any kind of medium that Reticulum supports.
+LXMF is a simple and flexible messaging format and delivery protocol that allows
+a wide variety of implementations, while using as little bandwidth as possible.
+It is built on top of Reticulum and offers zero-conf message routing, end-to-end encryption
+and Forward Secrecy, and can be transported over any kind of medium that Reticulum supports.
 
-	This package contains only bytecode and metadata.
+This package contains only bytecode and metadata.
 endef
 
 define Package/lxmf-src/description
-	LXMF is a simple and flexible messaging format and delivery protocol that allows
-	a wide variety of implementations, while using as little bandwidth as possible.
-	It is built on top of Reticulum and offers zero-conf message routing, end-to-end encryption
-	and Forward Secrecy, and can be transported over any kind of medium that Reticulum supports.
+LXMF is a simple and flexible messaging format and delivery protocol that allows
+a wide variety of implementations, while using as little bandwidth as possible.
+It is built on top of Reticulum and offers zero-conf message routing, end-to-end encryption
+and Forward Secrecy, and can be transported over any kind of medium that Reticulum supports.
 
-	This package adds the Python source code.
+This package adds the Python source code.
 endef
 
 define Package/lxmf/conffiles

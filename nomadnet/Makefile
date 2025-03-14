@@ -49,29 +49,29 @@ define Package/nomadnet-src
 endef
 
 define Package/nomadnet/description
-	Nomad Network allows you to build private and resilient communications platforms
-	that are in complete control and ownership of the people that use them.
-	No signups, no agreements, no handover of any data, no permissions and gatekeepers.
+Nomad Network allows you to build private and resilient communications platforms
+that are in complete control and ownership of the people that use them.
+No signups, no agreements, no handover of any data, no permissions and gatekeepers.
 
-	Nomad Network is build on LXMF and Reticulum, which together provides the cryptographic
-	mesh functionality and peer-to-peer message routing that Nomad Network relies on.
-	This foundation also makes it possible to use the program over a very wide variety of
-	communication mediums, from packet radio to fiber optics.
+Nomad Network is build on LXMF and Reticulum, which together provides the cryptographic
+mesh functionality and peer-to-peer message routing that Nomad Network relies on.
+This foundation also makes it possible to use the program over a very wide variety of
+communication mediums, from packet radio to fiber optics.
 
-	This package contains only bytecode and metadata.
+This package contains only bytecode and metadata.
 endef
 
 define Package/nomadnet-src/description
-	Nomad Network allows you to build private and resilient communications platforms
-	that are in complete control and ownership of the people that use them.
-	No signups, no agreements, no handover of any data, no permissions and gatekeepers.
+Nomad Network allows you to build private and resilient communications platforms
+that are in complete control and ownership of the people that use them.
+No signups, no agreements, no handover of any data, no permissions and gatekeepers.
 
-	Nomad Network is build on LXMF and Reticulum, which together provides the cryptographic
-	mesh functionality and peer-to-peer message routing that Nomad Network relies on.
-	This foundation also makes it possible to use the program over a very wide variety of
-	communication mediums, from packet radio to fiber optics.
+Nomad Network is build on LXMF and Reticulum, which together provides the cryptographic
+mesh functionality and peer-to-peer message routing that Nomad Network relies on.
+This foundation also makes it possible to use the program over a very wide variety of
+communication mediums, from packet radio to fiber optics.
 
-	This package adds the Python source code.
+This package adds the Python source code.
 endef
 
 define Package/nomadnet/conffiles
