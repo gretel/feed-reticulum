@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nomadnet
 PKG_VERSION:=0.6.1
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_LICENSE:=GNU
 PKG_LICENSE_FILES:=LICENSE
@@ -37,7 +37,7 @@ define Package/nomadnet
 	SUBMENU:=Reticulum
 	TITLE:=Nomad Network
 	URL:=https://github.com/markqvist/NomadNet
-	DEPENDS:=python3-urwid
+	DEPENDS:=lxmf
 endef
 
 define Package/nomadnet-src
