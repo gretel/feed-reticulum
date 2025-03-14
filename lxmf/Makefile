@@ -68,6 +68,7 @@ endef
 
 define Package/lxmf/conffiles
 /etc/config/lxmf
+/var/rns/.lxmd/config
 endef
 
 define Package/lxmf/postinst
@@ -92,6 +93,9 @@ define Py3Package/lxmf/install
 	$(INSTALL_BIN) ./files/lxmf.init $(1)/etc/init.d/lxmf
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/lxmf.config $(1)/etc/config/lxmf
+
+	mkdir -p $(1)/var/rns/.lxmd
+	$(INSTALL_DATA) ./files/config $(1)/var/rns/.lxmd/
 
 	$(INSTALL_BIN) ./files/lxmf-message.sh $(1)/usr/bin/
 endef

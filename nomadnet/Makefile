@@ -76,6 +76,7 @@ endef
 
 define Package/nomadnet/conffiles
 /etc/config/nomadnet
+/var/rns/.nomadnetwork/config
 endef
 
 define Package/nomadnet/postinst
@@ -100,6 +101,9 @@ define Py3Package/nomadnet/install
 	$(INSTALL_BIN) ./files/nomadnet.init $(1)/etc/init.d/nomadnet
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/nomadnet.config $(1)/etc/config/nomadnet
+
+	mkdir -p $(1)/var/rns/.nomadnetwork
+	$(INSTALL_DATA) ./files/config $(1)/var/rns/.nomadnetwork/
 endef
 
 $(eval $(call Py3Package,nomadnet))

@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rns
 PKG_VERSION:=0.9.3
-PKG_RELEASE:=0
+PKG_RELEASE:=1
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -82,13 +82,14 @@ endef
 
 define Package/rns/conffiles
 /etc/config/rns
+/var/rns/.reticulum/config
 endef
 
 define Package/rns/postinst
 #!/bin/sh
 [ -n "$$IPKG_INSTROOT" ] || {
 	# Create user and group
-	user_exists rns 142 || user_add rns 142
+	user_exists rns 142 || user_add rns 142 "Reticulum User" /var/rns /bin/ash
 	group_exists rns 142 || group_add rns 142
 
 	# Allow accessing serial ports
@@ -114,6 +115,9 @@ define Py3Package/rns/install
 	$(INSTALL_BIN) ./files/rns.init $(1)/etc/init.d/rns
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/rns.config $(1)/etc/config/rns
+
+	mkdir -p $(1)/var/rns/.reticulum
+	$(INSTALL_DATA) ./files/config $(1)/var/rns/.reticulum/
 endef
 
 $(eval $(call Py3Package,rns))

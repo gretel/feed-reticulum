@@ -1,0 +1,58 @@
+[logging]
+loglevel = 4
+# destination = file
+
+[client]
+enable_client = yes
+user_interface = text
+downloads_path = /var/rns
+notify_on_new_message = yes
+announce_at_start = yes
+try_propagation_on_send_fail = yes
+periodic_lxmf_sync = yes
+lxmf_sync_interval = 360
+lxmf_sync_limit = 8
+required_stamp_cost = 2
+accept_invalid_stamps = False
+max_accepted_size = 500
+compact_announce_stream = yes
+
+[textui]
+intro_time = 0
+theme = dark
+# colormode = monochrome
+# colormode = 16
+# colormode = 88
+colormode = 256
+# colormode = 24bit
+# glyphs = plain
+glyphs = unicode
+# glyphs = nerdfont
+mouse_enabled = False
+editor = vi
+hide_guide = yes
+
+[node]
+enable_node = No
+node_name = OpenRNS Nomad
+announce_interval = 360
+announce_at_start = Yes
+disable_propagation = Yes
+message_storage_limit = 8 # megabyte
+max_transfer_size = 256
+# prioritise_destinations = 41d20c727598a3fbbdf9106133a3a0ed, d924b81822ca24e68e2effea99bcb8cf
+max_peers = 10
+# static_peers = e17f833c4ddf8890dd3a79a6fea8161d, 5a2d0029b6e5ec87020abaea0d746da4
+page_refresh_interval = 3600
+file_refresh_interval = 3600
+
+[printing]
+print_messages = No
+# message_template = ~/.nomadnetwork/print_template_msg.txt
+# print_from = trusted
+# print_from = 76fe5751a56067d1e84eef3e88eab85b, 0e70b5848eb57c13154154feaeeb89b7
+# print_from = everywhere
+print_command = lp
+# print_command = lp -d PRINTER_NAME
+# print_command = lp -d PRINTER_NAME -o cpi=16 -o lpi=8
+# print_command = lp -d PRINTER_NAME -o page-left=36 -o page-top=36 -o page-right=36 -o page-bottom=36

@@ -1,0 +1,23 @@
+[propagation]
+enable_node = yes
+announce_at_start = yes
+announce_interval = 360
+autopeer = yes
+autopeer_maxdepth = 2
+max_peers = 10
+message_storage_limit = 16 # megabyte
+# propagation_transfer_max_accepted_size = 256
+# auth_required = no
+# from_static_only = True
+# prioritise_destinations = 41d20c727598a3fbbdf9106133a3a0ed, d924b81822ca24e68e2effea99bcb8cf
+# static_peers = e17f833c4ddf8890dd3a79a6fea8161d, 5a2d0029b6e5ec87020abaea0d746da4
+
+[lxmf]
+display_name = OpenRNS Peer
+announce_at_start = no
+# announce_interval = 360
+delivery_transfer_max_accepted_size = 1000
+# on_inbound = /usr/bin/lxmf-message.sh
+
+[logging]
+loglevel = 4
