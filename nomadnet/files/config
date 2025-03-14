@@ -1,21 +1,20 @@
 [logging]
 loglevel = 4
-# destination = file
 
 [client]
 enable_client = yes
 #user_interface = text
-downloads_path = /var/rns
-notify_on_new_message = yes
+accept_invalid_stamps = False
 announce_at_start = yes
-try_propagation_on_send_fail = yes
-periodic_lxmf_sync = yes
+compact_announce_stream = yes
+downloads_path = /var/rns
 lxmf_sync_interval = 360
 lxmf_sync_limit = 8
-required_stamp_cost = 2
-accept_invalid_stamps = False
 max_accepted_size = 500
-compact_announce_stream = yes
+notify_on_new_message = yes
+periodic_lxmf_sync = yes
+required_stamp_cost = 2 # TODO: remark
+try_propagation_on_send_fail = yes
 
 # [textui]
 # intro_time = 0

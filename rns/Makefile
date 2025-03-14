@@ -118,7 +118,6 @@ define Py3Package/rns/install
 
 	mkdir -p $(1)/var/rns/.reticulum
 	$(INSTALL_DATA) ./files/config $(1)/var/rns/.reticulum/
-	chown -R 142:142 $(1)/var/rns
 endef
 
 $(eval $(call Py3Package,rns))

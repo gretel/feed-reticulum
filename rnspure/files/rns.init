@@ -3,9 +3,9 @@
 START=20
 USE_PROCD=1
 
-PROG=/usr/bin/rnsd
-RUN_DIR=/var/rns
-USER=rns
+PROG="/usr/bin/rnsd"
+RUN_DIR="/var/rns/.reticulum"
+USER="rns"
 USERID=142
 
 ensure_user() {
@@ -15,7 +15,7 @@ ensure_user() {
 
 ensure_storage() {
 	mkdir -m 0755 -p ${RUN_DIR}
-	chown ${USER} ${RUN_DIR}
+	chown -R ${USER} ${RUN_DIR}
 }
 
 start_service() {
@@ -30,12 +30,7 @@ start_service() {
 
 	# Ensure dedicated user and group exists
 	ensure_user
-	# Check if deamon has been run before
-	if [ ! -d "${RUN_DIR}/.reticulum" ]; then
-		logger -t rns "Creating directory: ${RUN_DIR}, user: ${USER}"
-		# Ensure storage is set up
-		ensure_storage
-	fi
+	ensure_storage
 	
 	# Log the command we're about to run
 	logger -t rns "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
