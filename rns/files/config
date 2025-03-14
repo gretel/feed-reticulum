@@ -13,6 +13,7 @@
     type = AutoInterface
     enabled = True
     device = br-lan
+    bitrate = 100_000_000
 
   [[TCP Server Interface]]
     type = TCPServerInterface
