@@ -12,7 +12,7 @@ PKG_HASH:=70b5f3fa481257128c4c475738bd4f9a63380c4661714e33dca0215408fad523
 PKG_SOURCE:=nomadnet-$(PKG_VERSION)-py3-none-any.whl
 PKG_SOURCE_URL:=https://github.com/markqvist/NomadNet/releases/download/$(PKG_VERSION)
 
-PKG_BUILD_DEPENDS:=python-wheel/host
+PKG_BUILD_DEPENDS:=python-wheel/host python3-urwid
 
 PYTHON3_PKG_FORCE_DISTUTILS_SETUP:=1
 
@@ -37,7 +37,7 @@ define Package/nomadnet
 	SUBMENU:=Reticulum
 	TITLE:=Nomad Network
 	URL:=https://github.com/markqvist/NomadNet
-	DEPENDS:=lxmf
+	DEPENDS:=lxmf python3-urwid
 endef
 
 define Package/nomadnet-src
