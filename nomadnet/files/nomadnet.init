@@ -29,7 +29,7 @@ start_service() {
 	# Ensure dedicated user and group exists
 	ensure_user
 	# Check if deamon has been run before
-	if [ ! -d "${RUN_DIR}/.reticulum" ]; then
+	if [ ! -d "${RUN_DIR}/.nomadnetwork" ]; then
 		logger -t rns "Creating directory: ${RUN_DIR}, user: ${USER}"
 		# Ensure storage is set up
 		ensure_storage
