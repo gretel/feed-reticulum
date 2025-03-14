@@ -9,8 +9,8 @@ USER="rns"
 USERID=142
 
 ensure_user() {
-	user_exists $USER $USERID || user_add $USER $USERID
-	group_exists $USER $USERID || group_add $USER $USERID
+	user_exists ${USER} ${USERID} || user_add ${USER} ${USERID} "Reticulum User" /var/rns /bin/ash
+	group_exists ${USER} ${USERID} || group_add ${USER} ${USERID}
 }
 
 ensure_storage() {
