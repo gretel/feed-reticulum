@@ -12,20 +12,11 @@ We are working on stabilizing the packages and resolving various implementation 
 
 This feed provides the following packages:
 
-### rnspure 🌐
-Pure Python variant of the Reticulum Network Stack with no external dependencies required for installation.
-
-### rns 🌐
-The core Reticulum Network Stack implementation with Python dependencies.
-
-### lxmf 💬
-Lightweight Extensible Message Format implementation for messaging over Reticulum.
-
-### nomadnet🕸️
-Terminal-based resilient mesh communications platform built on LXMF and Reticulum.
-
-### python3-urwid 🖥️
-Console user interface library required by nomadnet.
+- `rns` The core Reticulum Network Stack implementation with Python dependencies.
+- `rnspure` Pure Python variant of the Reticulum Network Stack with no external dependencies required for installation.
+- `lxmf` Lightweight Extensible Message Format implementation for messaging over Reticulum.
+- `nomadnet` Terminal-based resilient mesh communications platform built on LXMF and Reticulum.
+    - `python3-urwid` - Console user interface library required by nomadnet.
 
 Note: The `-src` packages are optional and provide the Python source code, while the standard packages contain only bytecode and metadata as is typical for OpenWrt packages. Most users will only need the standard packages.
 
@@ -95,9 +86,9 @@ src-git reticulum https://github.com/gretel/feed-reticulum.git
 
 ```bash
 ./scripts/feeds list -s
-packages   src-git  2b999558db0711124f7b5cf4afa201557352f694 https://git.openwrt.org/feed/packages.git
-luci       src-git  e76155d09484602e2b02e84bb8ffafa4848798f0 https://git.openwrt.org/project/luci.git
-reticulum  src-git  3d196e9b824158b9a428892c426e8365dc02c373 https://github.com/gretel/feed-reticulum.git
+packages   src-git  c01643e78bdf2bcb7de93c7f5408d1c2c4c84aaa https://git.openwrt.org/feed/packages.git
+luci       src-git  96c36543311b4120667f463e99a65704f3546a0f https://git.openwrt.org/project/luci.git
+reticulum  src-git  39de91edbbff76e84d1672b71a7fc299ff0d6e67 https://github.com/gretel/feed-reticulum.git
 ```
 
 4. Update and install from all feeds:
@@ -192,12 +183,13 @@ Configuration file: `/etc/config/nomadnet`
 ### Urwid Configuration
 No configuration required - library package.
 
-## Known Issues ⚡
+## ToDos ⚡
 
 - [~~Python module import issues related to OpenWrt's bytecode-only packaging~~](https://github.com/markqvist/Reticulum/issues/623)
 - ~~Service initialization requires further testing~~
-- Documentation needs expansion
-- Implementation of systemd and procd service files needs testing
+- ~~Documentation needs expansion~~
+- ~~Implementation of procd service files needs testing~~
+- Ship suitable configuration for `rnsd` and `lxmd`
 
 ## Contributing 🤝
 
