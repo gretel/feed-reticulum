@@ -84,6 +84,10 @@ define Package/nomadnet/postinst
 [ -n "$$IPKG_INSTROOT" ] || {
 	# start service
 	/etc/init.d/nomadnet start
+
+	# Preserve on upgrade
+	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
+	echo "/var/rns/.nomadnetwork" > "/lib/upgrade/keep.d/nomadnetwork"
 }
 endef
 

@@ -97,7 +97,7 @@ define Package/rns/postinst
 
 	# Preserve on upgrade
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
-	echo "/var/rns/" > "/lib/upgrade/keep.d/rns"
+	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
 }
 endef
 

@@ -1,5 +1,5 @@
 [propagation]
-enable_node = yes
+#enable_node = yes # let the init script decide
 announce_at_start = yes
 announce_interval = 360
 autopeer = yes
