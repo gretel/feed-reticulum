@@ -71,12 +71,12 @@ endef
 
 define Build/Prepare/pure
 	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) $(DL_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/
+	$(CP) $(DL_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl
 endef
 
 define Build/Prepare/full
 	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) $(DL_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/
+	$(CP) $(DL_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl
 endef
 
 define Build/Prepare
