@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rns
 PKG_VERSION:=0.9.3
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -37,6 +37,7 @@ define Package/rns
 	SUBMENU:=Reticulum
 	TITLE:=Reticulum Network Stack
 	URL:=https://github.com/markqvist/Reticulum
+	CONFLICTS:=rnspure
 	DEPENDS:= \
 		+python3-asyncio \
 		+python3-codecs \
@@ -54,6 +55,7 @@ define Package/rns-src
 	SUBMENU:=Reticulum
 	TITLE:=Reticulum Network Stack (Source Code)
 	URL:=https://github.com/markqvist/Reticulum
+	CONFLICTS:=rnspure-src
 endef
 
 define Package/rns/description
@@ -87,13 +89,17 @@ endef
 
 define Package/rns/postinst
 #!/bin/sh
+# https://openwrt.org/docs/guide-developer/procd-init-scripts#init_scripts_during_compilation
 [ -n "$$IPKG_INSTROOT" ] || {
 	# Create user and group
 	user_exists rns 142 || user_add rns 142 "Reticulum User" /var/rns /bin/ash
-	group_exists rns 142 || group_add rns 142
+	group_exists rns 142 || group_add rns 142 && group_add_user rns rns
 
 	# Allow accessing serial ports
 	group_add_user dialout rns
+
+	mkdir -m 0755 -p $(1)/var/rns/.reticulum
+	chown -R rns:rns $(1)/var/rns
 
 	# Preserve on upgrade
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
@@ -115,8 +121,6 @@ define Py3Package/rns/install
 	$(INSTALL_BIN) ./files/rns.init $(1)/etc/init.d/rns
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/rns.config $(1)/etc/config/rns
-
-	mkdir -p $(1)/var/rns/.reticulum
 	$(INSTALL_DATA) ./files/config $(1)/var/rns/.reticulum/
 endef
 
