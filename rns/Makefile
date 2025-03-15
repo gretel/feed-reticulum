@@ -69,44 +69,35 @@ define Package/rnspure-src
 	VARIANT:=pure
 endef
 
-define Build/Prepare/pure
-	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) $(DL_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl
-endef
+# Define source files for each variant
+PKG_SOURCE_FULL:=rns-$(PKG_VERSION)-py3-none-any.whl
+PKG_SOURCE_PURE:=rnspure-$(PKG_VERSION)-py3-none-any.whl
 
-define Build/Prepare/full
-	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) $(DL_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl
-endef
-
+# Build preparation for each variant
 define Build/Prepare
-	$(if $(filter pure,$(BUILD_VARIANT)),\
-		$(call Build/Prepare/pure),\
-		$(call Build/Prepare/full)\
-	)
+	mkdir -p $(PKG_BUILD_DIR)
+ifeq ($(BUILD_VARIANT),pure)
+	$(CP) $(DL_DIR)/$(PKG_SOURCE_PURE) $(PKG_BUILD_DIR)/
+else
+	$(CP) $(DL_DIR)/$(PKG_SOURCE_FULL) $(PKG_BUILD_DIR)/
+endif
 endef
 
-define Build/Compile/pure
-	$(HOST_PYTHON3_BIN) -m installer \
-		--destdir "$(PKG_INSTALL_DIR)" \
-		--no-compile-bytecode \
-		--prefix /usr \
-		"$(PKG_BUILD_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl"
-endef
-
-define Build/Compile/full
-	$(HOST_PYTHON3_BIN) -m installer \
-		--destdir "$(PKG_INSTALL_DIR)" \
-		--no-compile-bytecode \
-		--prefix /usr \
-		"$(PKG_BUILD_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl"
-endef
-
+# Compilation for each variant
 define Build/Compile
-	$(if $(filter pure,$(BUILD_VARIANT)),\
-		$(call Build/Compile/pure),\
-		$(call Build/Compile/full)\
-	)
+ifeq ($(BUILD_VARIANT),pure)
+	$(HOST_PYTHON3_BIN) -m installer \
+		--destdir "$(PKG_INSTALL_DIR)" \
+		--no-compile-bytecode \
+		--prefix /usr \
+		"$(PKG_BUILD_DIR)/$(PKG_SOURCE_PURE)"
+else
+	$(HOST_PYTHON3_BIN) -m installer \
+		--destdir "$(PKG_INSTALL_DIR)" \
+		--no-compile-bytecode \
+		--prefix /usr \
+		"$(PKG_BUILD_DIR)/$(PKG_SOURCE_FULL)"
+endif
 endef
 
 # Common installation logic
@@ -122,6 +113,8 @@ define Py3Package/Install/Default
 	$(INSTALL_BIN) ./files/rns.init $(1)/etc/init.d/rns
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/rns.config $(1)/etc/config/rns
+	
+	$(INSTALL_DIR) $(1)/var/rns/.reticulum
 	$(INSTALL_DATA) ./files/config $(1)/var/rns/.reticulum/
 endef
 
@@ -190,8 +183,6 @@ define Package/reticulum/Default/postinst
 	user_exists rns 142 || user_add rns 142 "Reticulum User" /var/rns /bin/ash
 	group_exists rns 142 || group_add rns 142 && group_add_user rns rns
 	group_add_user dialout rns
-	mkdir -m 0755 -p /var/rns/.reticulum
-	chown -R rns:rns /var/rns
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
 	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
 }
