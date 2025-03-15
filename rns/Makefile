@@ -69,29 +69,44 @@ define Package/rnspure-src
 	VARIANT:=pure
 endef
 
-define Build/Prepare
+define Build/Prepare/pure
 	mkdir -p $(PKG_BUILD_DIR)
-ifeq ($(BUILD_VARIANT),pure)
 	$(CP) $(DL_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/
-else
-	$(CP) $(DL_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/
-endif
 endef
 
-define Build/Compile
-ifeq ($(BUILD_VARIANT),pure)
+define Build/Prepare/full
+	mkdir -p $(PKG_BUILD_DIR)
+	$(CP) $(DL_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/
+endef
+
+define Build/Prepare
+	$(if $(filter pure,$(BUILD_VARIANT)),\
+		$(call Build/Prepare/pure),\
+		$(call Build/Prepare/full)\
+	)
+endef
+
+define Build/Compile/pure
 	$(HOST_PYTHON3_BIN) -m installer \
 		--destdir "$(PKG_INSTALL_DIR)" \
 		--no-compile-bytecode \
 		--prefix /usr \
 		"$(PKG_BUILD_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl"
-else
+endef
+
+define Build/Compile/full
 	$(HOST_PYTHON3_BIN) -m installer \
 		--destdir "$(PKG_INSTALL_DIR)" \
 		--no-compile-bytecode \
 		--prefix /usr \
 		"$(PKG_BUILD_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl"
-endif
+endef
+
+define Build/Compile
+	$(if $(filter pure,$(BUILD_VARIANT)),\
+		$(call Build/Compile/pure),\
+		$(call Build/Compile/full)\
+	)
 endef
 
 # Common installation logic
