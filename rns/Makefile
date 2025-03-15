@@ -11,6 +11,9 @@ PKG_MAINTAINER:=Tom Hensel <code@jitter.eu>
 # Common build dependencies
 PKG_BUILD_DEPENDS:=python-wheel/host
 
+# Force using our build method
+PYTHON3_PKG_FORCE_DISTUTILS_SETUP:=1
+
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
@@ -69,37 +72,20 @@ define Package/rnspure-src
 	VARIANT:=pure
 endef
 
-# Define separate prepare and compile targets per variant
-# The OpenWrt build system will call the appropriate one based on variant
+# Define source files based on variant
+PKG_SOURCE=$(if $(filter pure,$(BUILD_VARIANT)),rnspure-$(PKG_VERSION)-py3-none-any.whl,rns-$(PKG_VERSION)-py3-none-any.whl)
 
-# Full variant
-define Build/Prepare/full
+define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) $(DL_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/
+	$(CP) $(DL_DIR)/$(PKG_SOURCE) $(PKG_BUILD_DIR)/
 endef
 
-# Pure variant
-define Build/Prepare/pure
-	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) $(DL_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl $(PKG_BUILD_DIR)/
-endef
-
-# Compile for full variant
-define Build/Compile/full
+define Build/Compile
 	$(HOST_PYTHON3_BIN) -m installer \
 		--destdir "$(PKG_INSTALL_DIR)" \
 		--no-compile-bytecode \
 		--prefix /usr \
-		"$(PKG_BUILD_DIR)/rns-$(PKG_VERSION)-py3-none-any.whl"
-endef
-
-# Compile for pure variant
-define Build/Compile/pure
-	$(HOST_PYTHON3_BIN) -m installer \
-		--destdir "$(PKG_INSTALL_DIR)" \
-		--no-compile-bytecode \
-		--prefix /usr \
-		"$(PKG_BUILD_DIR)/rnspure-$(PKG_VERSION)-py3-none-any.whl"
+		"$(PKG_BUILD_DIR)/$(PKG_SOURCE)"
 endef
 
 # Common installation logic
@@ -185,6 +171,8 @@ define Package/reticulum/Default/postinst
 	user_exists rns 142 || user_add rns 142 "Reticulum User" /var/rns /bin/ash
 	group_exists rns 142 || group_add rns 142 && group_add_user rns rns
 	group_add_user dialout rns
+	mkdir -m 0755 -p /var/rns/.reticulum
+	chown -R rns:rns /var/rns
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
 	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
 }
