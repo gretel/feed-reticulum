@@ -179,7 +179,6 @@ define Package/reticulum/Default/postinst
 	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
 
 	# start service
-	/etc/init.d/rns enable
 	/etc/init.d/rns start
 }
 endef

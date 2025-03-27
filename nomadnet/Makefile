@@ -89,7 +89,6 @@ define Package/nomadnet/postinst
 	echo "/var/rns/.nomadnetwork" > "/lib/upgrade/keep.d/nomadnetwork"
 
 	# start service
-	/etc/init.d/nomadnet enable
 	/etc/init.d/nomadnet start
 }
 endef

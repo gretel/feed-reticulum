@@ -79,7 +79,6 @@ define Package/lxmf/postinst
 	echo "/var/rns/.lxmd" > "/lib/upgrade/keep.d/lxmf"
 
 	# start service
-	/etc/init.d/lxmf enable
 	/etc/init.d/lxmf start
 }
 endef
