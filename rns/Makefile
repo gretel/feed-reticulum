@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=reticulum
 PKG_VERSION:=0.9.3
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -30,6 +30,7 @@ define Package/reticulum/Default
 		+python3-light \
 		+python3-logging \
 		+python3-multiprocessing
+	USERID:=rns=142:rns=142
 endef
 
 # Full version with all dependencies
@@ -173,8 +174,22 @@ define Package/reticulum/Default/postinst
 	group_add_user dialout rns
 	mkdir -m 0755 -p /var/rns/.reticulum
 	chown -R rns:rns /var/rns
+
+	# start service
+	/etc/init.d/rns enable
+	/etc/init.d/rns start
+
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
 	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
+}
+endef
+
+define Package/reticulum/Default/prerm
+#!/bin/sh
+[ -n "$$IPKG_INSTROOT" ] || {
+	/etc/init.d/rns disable
+	/etc/init.d/rns stop
+	/etc/init.d/rns ucidel
 }
 endef
 
@@ -184,6 +199,14 @@ endef
 
 define Package/rnspure/postinst
 $(call Package/reticulum/Default/postinst)
+endef
+
+define Package/rns/prerm
+$(call Package/reticulum/Default/prerm)
+endef
+
+define Package/rnspure/prerm
+$(call Package/reticulum/Default/prerm)
 endef
 
 # Download definitions for each variant
