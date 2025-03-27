@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=reticulum
 PKG_VERSION:=0.9.3
-PKG_RELEASE:=6
+PKG_RELEASE:=7
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -175,12 +175,12 @@ define Package/reticulum/Default/postinst
 	mkdir -m 0755 -p /var/rns/.reticulum
 	chown -R rns:rns /var/rns
 
+	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
+	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
+
 	# start service
 	/etc/init.d/rns enable
 	/etc/init.d/rns start
-
-	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
-	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
 }
 endef
 
