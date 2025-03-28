@@ -8,6 +8,17 @@ RUN_DIR="/var/rns"
 USER="rns"
 USERID=142
 
+ensure_user() {
+	user_exists ${USER} ${USERID} || user_add ${USER} ${USERID} "Reticulum User" /var/rns /bin/ash
+	group_exists ${USER} ${USERID} || group_add ${USER} ${USERID} && group_add_user ${USER} ${USER}
+	group_add_user dialout ${USER}
+}
+
+ensure_storage() {
+	mkdir -m 0755 -p ${RUN_DIR}
+	chown -R ${USER}:${USER} ${RUN_DIR}
+}
+
 start_service() {
 	config_load nomadnet
 	config_get_bool enabled main enabled 0
@@ -18,6 +29,10 @@ start_service() {
 
 	# We can only handle daemons here
 	local args="-c -d"
+
+	# Ensure dedicated user and group exists
+	ensure_user
+	ensure_storage
 
 	# Log the command we're about to run
 	logger -t nomadnet "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
