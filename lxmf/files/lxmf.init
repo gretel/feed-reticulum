@@ -4,19 +4,9 @@ START=28
 USE_PROCD=1
 
 PROG="/usr/bin/lxmd"
-RUN_DIR="/var/rns/.lxmd"
+RUN_DIR="/var/rns"
 USER="rns"
 USERID=142
-
-ensure_user() {
-	user_exists ${USER} ${USERID} || user_add ${USER} ${USERID} "Reticulum User" /var/rns /bin/ash
-	group_exists ${USER} ${USERID} || group_add ${USER} ${USERID}
-}
-
-ensure_storage() {
-	mkdir -m 0755 -p ${RUN_DIR}
-	chown -R ${USER} ${RUN_DIR}
-}
 
 start_service() {
 	config_load lxmf
@@ -34,10 +24,6 @@ start_service() {
 	local args="-q" # quiet
 	[ "$propagation_node" -eq 1 ] && args="$args -p"
 	[ -n "$on_inbound" ] && [ -x "$on_inbound" ] && args="$args -i $on_inbound"
-
-	# Ensure dedicated user and group exists
-	ensure_user
-	ensure_storage
 
 	# Log the command we're about to run
 	logger -t lxmf "Running command: ${PROG} ${args}, home directory: ${RUN_DIR}"
