@@ -75,10 +75,6 @@ endef
 define Package/lxmf/postinst
 #!/bin/sh
 [ -n "$$IPKG_INSTROOT" ] || {
-	# Preserve on upgrade
-	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
-	echo "/var/rns/.lxmd" > "/lib/upgrade/keep.d/lxmf"
-
 	# start service
 	/etc/init.d/lxmf start
 }

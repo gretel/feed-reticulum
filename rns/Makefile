@@ -172,11 +172,11 @@ define Package/reticulum/Default/postinst
 	user_exists rns 142 || user_add rns 142 "Reticulum User" /var/rns /bin/ash
 	group_exists rns 142 || group_add rns 142 && group_add_user rns rns
 	group_add_user dialout rns
-	mkdir -m 0755 -p /var/rns/.reticulum
+	mkdir -m 0755 -p /var/rns
 	chown -R rns:rns /var/rns
 
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
-	echo "/var/rns/.reticulum" > "/lib/upgrade/keep.d/rns"
+	echo "/var/rns" > "/lib/upgrade/keep.d/rns"
 
 	# start service
 	/etc/init.d/rns start
