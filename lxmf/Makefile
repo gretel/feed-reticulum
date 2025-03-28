@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lxmf
 PKG_VERSION:=0.6.3
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -88,7 +88,6 @@ define Package/lxmf/prerm
 [ -n "$$IPKG_INSTROOT" ] || {
         /etc/init.d/lxmf disable
         /etc/init.d/lxmf stop
-        /etc/init.d/lxmf ucidel
 }
 endef
 

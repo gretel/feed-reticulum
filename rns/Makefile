@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=reticulum
 PKG_VERSION:=0.9.3
-PKG_RELEASE:=8
+PKG_RELEASE:=9
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -188,7 +188,6 @@ define Package/reticulum/Default/prerm
 [ -n "$$IPKG_INSTROOT" ] || {
 	/etc/init.d/rns disable
 	/etc/init.d/rns stop
-	/etc/init.d/rns ucidel
 }
 endef
 

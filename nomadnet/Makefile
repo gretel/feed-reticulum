@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nomadnet
 PKG_VERSION:=0.6.1
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 
 PKG_LICENSE:=GNU
 PKG_LICENSE_FILES:=LICENSE
@@ -98,7 +98,6 @@ define Package/nomadnet/prerm
 [ -n "$$IPKG_INSTROOT" ] || {
         /etc/init.d/nomadnet disable
         /etc/init.d/nomadnet stop
-        /etc/init.d/nomadnet ucidel
 }
 endef
 
