@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=reticulum
 PKG_VERSION:=0.9.3
-PKG_RELEASE:=10
+PKG_RELEASE:=11
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -29,7 +29,8 @@ define Package/reticulum/Default
 		+python3-ctypes \
 		+python3-light \
 		+python3-logging \
-		+python3-multiprocessing
+		+python3-multiprocessing \
+		+python3-pyserial
 	USERID:=rns=142:rns=142
 endef
 
@@ -38,8 +39,7 @@ define Package/rns
 	$(call Package/reticulum/Default)
 	TITLE:=Reticulum Network Stack
 	DEPENDS+= \
-		+python3-cryptography \
-		+python3-pyserial
+		+python3-cryptography
 	CONFLICTS:=rnspure
 	VARIANT:=full
 endef
