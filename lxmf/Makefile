@@ -38,6 +38,7 @@ define Package/lxmf
 	TITLE:=Lightweight Extensible Message Format
 	URL:=https://github.com/markqvist/LXMF
 	DEPENDS:=rns
+	USERID:=rns=142:rns=142
 endef
 
 define Package/lxmf-src

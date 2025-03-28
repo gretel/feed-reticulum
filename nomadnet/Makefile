@@ -40,6 +40,7 @@ define Package/nomadnet
 	DEPENDS:= \
 		+lxmf \
 		+python3-urwid
+	USERID:=rns=142:rns=142
 endef
 
 define Package/nomadnet-src
