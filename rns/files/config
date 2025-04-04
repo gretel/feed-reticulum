@@ -5,7 +5,7 @@
   #remote_management_allowed = 9cdf24c855576d32fdced90c3e884e3f
 
 [logging]
-  loglevel = 4
+  loglevel = 3
 
 [interfaces]
 
@@ -19,7 +19,7 @@
     type = TCPServerInterface
     enabled = True
     device = br-lan
-    bitrate = 100_000_000
+    bitrate = 10_000_000
     mode = boundary
     port = 4242
     announce_rate_grace = 4
@@ -28,7 +28,7 @@
 
   [[RNode Germany]]
     type = RNodeInterface
-    enabled = False
+    enabled = True
     port = /dev/ttyUSB0
     frequency = 869525000
     bandwidth = 250000
@@ -46,4 +46,3 @@
     target_host = rns.c3.jitter.eu
     target_port = 4242
     bitrate = 10_000_000
-
