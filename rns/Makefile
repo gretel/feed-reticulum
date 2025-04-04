@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=reticulum
 PKG_VERSION:=0.9.3
-PKG_RELEASE:=13
+PKG_RELEASE:=14
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -171,14 +171,15 @@ define Package/reticulum/Default/postinst
 	user_exists rns 142 || user_add rns 142 "Reticulum User" /var/rns /bin/ash
 	group_exists rns 142 || group_add rns 142 && group_add_user rns rns
 	group_add_user dialout rns
+
 	mkdir -m 0755 -p /var/rns
-	chown -R rns:rns /var/rns
+	#chown -R 142:142 /var/rns
 
 	[ -d "/lib/upgrade/keep.d" ] || mkdir -p "/lib/upgrade/keep.d/"
 	echo "/var/rns" > "/lib/upgrade/keep.d/rns"
 
 	# start service
-	/etc/init.d/rns start
+	#/etc/init.d/rns start
 }
 endef
 
