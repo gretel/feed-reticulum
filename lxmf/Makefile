@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lxmf
 PKG_VERSION:=0.6.3
-PKG_RELEASE:=7
+PKG_RELEASE:=8
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -38,7 +38,6 @@ define Package/lxmf
 	TITLE:=Lightweight Extensible Message Format
 	URL:=https://github.com/markqvist/LXMF
 	DEPENDS:=rns
-	USERID:=rns=142:rns=142
 endef
 
 define Package/lxmf-src

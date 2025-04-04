@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nomadnet
 PKG_VERSION:=0.6.1
-PKG_RELEASE:=8
+PKG_RELEASE:=9
 
 PKG_LICENSE:=GNU
 PKG_LICENSE_FILES:=LICENSE
@@ -40,7 +40,6 @@ define Package/nomadnet
 	DEPENDS:= \
 		+lxmf \
 		+python3-urwid
-	USERID:=rns=142:rns=142
 endef
 
 define Package/nomadnet-src
